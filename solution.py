@@ -48,7 +48,7 @@ def save_img(im):
         img_name = img_name.replace(i,'')
     img_name +='.jpg'
     img_name = img_name.replace(' ','_')
-#     print("img name: ",img_name)
+
 
     file=open(img_name,'wb')
     file.write(url.content)
@@ -138,6 +138,7 @@ if __name__ == '__main__':
 
     api_data,length_of_items = length_of_items_func()
    
+    ######### CHANGE noth ACCORDING TO YOUR SYSTEM HARDWARE AND RESURCESS 
     noth = 3
     print(f"############### Number of threads:  {noth}   #########")
 
@@ -188,7 +189,7 @@ if __name__ == '__main__':
 
 
 #bonus code
-
+########### you can use this code to convert the rgb values to their color names #########
 
 # from scipy.spatial import KDTree
 # from webcolors import CSS3_HEX_TO_NAMES,hex_to_rgb

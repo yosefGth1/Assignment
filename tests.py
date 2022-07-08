@@ -31,10 +31,11 @@ def results_file_check(*args):
 			list_of_lines.append(line)
 		
 		print("Every line has the correct pattern ")
+		#putting the list in a set to check for duplication
 		set_of_line.update(list_of_lines)
 		assert len(set_of_line) == length_of_items , "There are duplicate lines"
 		print("No duplicate lines")
-		print(len(set_of_line))
+		
 		
 		for i in list_of_lines:
 			set_os_ids.add(i.split(',')[0])
