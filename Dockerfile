@@ -9,9 +9,7 @@ RUN apt-get install bash
 
 RUN git clone https://github.com/yosefGth1/Assignment.git
 WORKDIR Assignment
-COPY requirements.txt .
-COPY solution.py .
-COPY tests.py .
+
 RUN pip3 install -r requirements.txt
 
 RUN python3 solution.py 
