@@ -6,11 +6,10 @@ RUN apt-get install -y pip
 RUN apt-get install -y git
 RUN apt-get install bash
 
-RUN pwd
+
 RUN git clone https://github.com/yosefGth1/Assignment.git
 
-CMD [“ls -al”] 
+COPY requirements.txt .
+RUN pip3 install -r requirements.txt
 
-RUN cd Assignment
-RUN /bin/bash -c pip install -r requ*
-RUN /bin/bash -c python3 solution.py 
+RUN python3 solution.py 
