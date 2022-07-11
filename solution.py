@@ -11,7 +11,7 @@ import imutils
 import requests as req
 import time
 import threading as thrd
-# from multiprocessing import Process,freeze_support
+from concurrent.futures import ThreadPoolExecutor 
 
 
 #NUM OF DOMINANT COLORS
@@ -19,11 +19,16 @@ clusters = 4
 
 
 def calc_time(func):
+    timestamps = []
     def inner(tn=1,noth=2):
         start = time.time()
         func(tn,noth)
-        end = time.time() - start
-        print(f"it takes function  {func.__name__} {end} - seconds to run")
+        end = round(time.time() - start,5)
+        
+        timestamps.append(end) 
+        if len(timestamps)==noth or noth==2:
+
+            print(f"it takes the function named {func.__name__} - {timestamps[-1:]} - seconds to run")
     return inner    
 
 
@@ -32,8 +37,7 @@ def length_of_items_func():
 
     dt = req.get("https://api.imgflip.com/get_memes")
     api_data=json.loads(dt.content)
-    length_of_items =  len(api_data['data']['memes'])     
-    print(length_of_items) 
+    length_of_items =  len(api_data['data']['memes'])      
     return (api_data,length_of_items)
 
 
@@ -55,7 +59,7 @@ def save_img(im):
     img_path=file.name
     file.close()
 
-    print("img path:  "+img_path)
+    print("processing image:  "+im['name'])
 
     return img_path
 
@@ -91,7 +95,7 @@ def write_to_csv(dominant_colors,im):
     data = [i for i in dominant_colors]
     
     with open('results.csv', 'a') as f:
-        # print("working on csv",f.name)
+        
         f.write(im['id']+" , ")
         f.write(im['url']+" , ")
         f.write(str(im['height'])+" , ")
@@ -139,15 +143,43 @@ if __name__ == '__main__':
     api_data,length_of_items = length_of_items_func()
    
     ######### CHANGE noth ACCORDING TO YOUR SYSTEM HARDWARE AND RESURCESS 
-    noth = 3
-    print(f"############### Number of threads:  {noth}   #########")
+    ## NOTH = NUMBER OF THREADS ##
+    NOTH = 5
 
-    for i in range(noth+1):
-        p1 = thrd.Thread(target=run_final,args=(i,noth))
-        p1.start()
-    p1.join()
+    print(f"############### Number of threads:  {NOTH}   #########")
+    print("processing images ....")
+
+
+
+
+    with ThreadPoolExecutor(NOTH) as executor:
+    
+        for i in range(1,NOTH+1):
+            
+            executor.submit(run_final,i,NOTH)
+
+
+
+   
+
+
+
+
+
+
 
     ############### MANUAL MULTITHREADING IN CASE OF ERRORS   ############################
+
+    #### OPTION 1:
+
+    # for i in range(1,NOTH+1):
+
+    #     p1 = thrd.Thread(target=run_final,args=(i,NOTH))
+    #     p1.start()
+    # p1.join()
+
+
+    ### OPTION 2: 
 
     # p1 = thrd.Thread(target=run_final,args=(1,noth))
     # p2 = thrd.Thread(target=run_final,args=(2,noth))

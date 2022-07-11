@@ -11,5 +11,5 @@ RUN git clone https://github.com/yosefGth1/Assignment.git
 
 COPY requirements.txt .
 RUN pip3 install -r requirements.txt
-
+COPY solution.py .
 RUN python3 solution.py 
