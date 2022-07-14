@@ -170,49 +170,13 @@ if __name__ == '__main__':
 
     ############### MANUAL MULTITHREADING IN CASE OF ERRORS   ############################
 
-    #### OPTION 1:
+
 
     # for i in range(1,NOTH+1):
 
     #     p1 = thrd.Thread(target=run_final,args=(i,NOTH))
     #     p1.start()
     # p1.join()
-
-
-    ### OPTION 2: 
-
-    # p1 = thrd.Thread(target=run_final,args=(1,noth))
-    # p2 = thrd.Thread(target=run_final,args=(2,noth))
-    # p3 = thrd.Thread(target=run_final,args=(3,noth))
-    # p4 = thrd.Thread(target=run_final,args=(4,noth))
-    # p5 = thrd.Thread(target=run_final,args=(5,noth))
-    # p6 = thrd.Thread(target=run_final,args=(6,noth))
-    # p7 = thrd.Thread(target=run_final,args=(7,noth))
-    # p8 = thrd.Thread(target=run_final,args=(8,noth))
-    # p9 = thrd.Thread(target=run_final,args=(9,noth))
-    # p10 = thrd.Thread(target=run_final,args=(10,noth))
-
-
-    # p1.start()
-    # p2.start()
-    # p3.start()
-    # p4.start()
-    # p5.start()
-    # p6.start()
-    # p7.start()
-    # p8.start()
-    # p9.start()
-    # p10.start()
-    # p1.join()
-    # p2.join()
-    # p3.join()
-    # p4.join()
-    # p5.join()
-    # p6.join()
-    # p7.join()
-    # p8.join()
-    # p9.join()
-    # p10.join()
 
 
 
